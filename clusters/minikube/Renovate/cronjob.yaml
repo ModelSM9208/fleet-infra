@@ -13,7 +13,6 @@ spec:
           containers:
           - name: renovate
             image: renovate/renovate:37
-#            args: ["--autodiscover"]
             env:
             - name: RENOVATE_TOKEN
               valueFrom:
