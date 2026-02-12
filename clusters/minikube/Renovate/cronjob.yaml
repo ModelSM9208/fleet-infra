@@ -13,15 +13,15 @@ spec:
           containers:
           - name: renovate
             image: renovate/renovate:37
-#            args: ["--autodiscover"]
+            args: ["--autodiscover"]
             env:
             - name: RENOVATE_TOKEN
               valueFrom:
                 secretKeyRef:
                   name: renovate-secret
                   key: token
-            - name: RENOVATE_CONFIG_FILE
-              value: "/usr/src/app/config.json"
+#            - name: RENOVATE_CONFIG_FILE
+#              value: "/usr/src/app/config.json"
             - name: LOG_LEVEL
               value: "info"
             volumeMounts:
