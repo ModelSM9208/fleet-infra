@@ -1,0 +1,14 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: renovate-config
+  namespace: renovate
+data:
+  config.json: |
+    {
+      "platform": "github",
+      "repositories": ["ModelSM9208/fleet-infra"],
+      "onboarding": true,
+      "requireConfig": "optional",
+      "gitAuthor": "Renovate Bot <bot@renovateapp.com>"
+    }
