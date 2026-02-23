@@ -20,6 +20,10 @@ metadata:
     nginx.ingress.kubernetes.io/proxy-read-timeout: "600"
 spec:
   ingressClassName: nginx
+  tls:
+    - hosts:
+        - arm.local
+      secretName: arm-tls
   rules:
     - host: arm.local
       http:
