@@ -16,9 +16,6 @@ spec:
         - name: fix-perms
           image: busybox
           command: ["sh", "-c", "chown -R 1000:1000 /home/arm /etc/arm/config"]
-          resources:
-            limits:
-              amd.com/gpu: 1
           volumeMounts:
             - name: home-arm
               mountPath: /home/arm
@@ -35,6 +32,9 @@ spec:
       containers:
         - name: arm-rippers
           image: registry.local/automaticrippingmachine/automatic-ripping-machine:latest
+          resources:
+            limits:
+              amd.com/gpu: 1
           securityContext:
             privileged: true
           ports:
