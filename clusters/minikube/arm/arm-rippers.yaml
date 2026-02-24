@@ -12,21 +12,6 @@ spec:
       labels:
         app: arm-rippers
     spec:
-      initContainers:
-        - name: fix-perms
-          image: busybox
-          command: ["sh", "-c", "chown -R 1000:1000 /home/arm /etc/arm/config"]
-          volumeMounts:
-            - name: home-arm
-              mountPath: /home/arm
-            - name: music
-              mountPath: /home/arm/Music
-            - name: logs
-              mountPath: /home/arm/logs
-            - name: media
-              mountPath: /home/arm/media
-            - name: config
-              mountPath: /etc/arm/config
       containers:
         - name: arm-rippers
           image: registry.local/automaticrippingmachine/automatic-ripping-machine:latest
@@ -35,13 +20,9 @@ spec:
               amd.com/gpu: 1
           securityContext:
             privileged: true
+            runAsUser: 0
           ports:
             - containerPort: 8080
-          env:
-            - name: ARM_UID
-              value: "1000"
-            - name: ARM_GID
-              value: "1000"
           volumeMounts:
             - name: home-arm
               mountPath: /home/arm
