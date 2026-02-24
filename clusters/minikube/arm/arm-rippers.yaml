@@ -16,7 +16,6 @@ spec:
         - name: fix-perms
           image: busybox
           command: ["sh", "-c", "chown -R 1000:1000 /home/arm /etc/arm/config"]
-          command: ["sh", "-c", "chmod u+s /usr/bin/mount /usr/bin/umount /usr/bin/eject" ]
           volumeMounts:
             - name: home-arm
               mountPath: /home/arm
