@@ -27,8 +27,6 @@ spec:
               mountPath: /home/arm/media
             - name: config
               mountPath: /etc/arm/config
-            - name: sr0
-              mountPath: /dev/sr0
       containers:
         - name: arm-rippers
           image: registry.local/automaticrippingmachine/automatic-ripping-machine:latest
@@ -55,8 +53,6 @@ spec:
               mountPath: /home/arm/media
             - name: config
               mountPath: /etc/arm/config
-            - name: sr0
-              mountPath: /dev/sr0
       volumes:
         - name: home-arm
           persistentVolumeClaim:
@@ -73,7 +69,3 @@ spec:
         - name: config
           persistentVolumeClaim:
             claimName: arm-config
-        - name: sr0
-          hostPath:
-            path: /dev/sr0
-            type: BlockDevice
