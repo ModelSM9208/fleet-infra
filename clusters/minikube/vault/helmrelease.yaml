@@ -38,23 +38,14 @@ spec:
             path = "/vault/data"
           }
 
-      # Persistent storage via NFS
+      # Reference our pre-created NFS PVC rather than letting Helm create one
       dataStorage:
         enabled: true
         size: 10Gi
         storageClass: nfs
         accessMode: ReadWriteOnce
         mountPath: /vault/data
-
-      # Use the PVC we defined in storage.yaml
-      volumes:
-        - name: vault-data
-          persistentVolumeClaim:
-            claimName: vault-data
-
-      volumeMounts:
-        - name: vault-data
-          mountPath: /vault/data
+        existingClaim: vault-data
 
     # Vault UI enabled - useful for lab
     ui:
