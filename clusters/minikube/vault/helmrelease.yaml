@@ -45,7 +45,6 @@ spec:
         storageClass: nfs
         accessMode: ReadWriteOnce
         mountPath: /vault/data
-        existingClaim: vault-data
 
     # Vault UI enabled - useful for lab
     ui:
