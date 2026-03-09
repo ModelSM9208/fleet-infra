@@ -8,9 +8,9 @@ data:
   # Format: SOURCE_IMAGE=DESTINATION_IMAGE
   # or just SOURCE_IMAGE (will use same path in local registry)
   images.txt: |
-    pihole:latest
-    jellyfin:latest
-    automatic-ripping-machine:latest
+    pihole/pihole:latest
+    jellyfin/jellyfin:latest
+    automaticrippingmachine/automatic-ripping-machine:latest
 
   
   # The sync script that will be executed
