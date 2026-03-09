@@ -53,10 +53,10 @@ data:
         "docker://${SOURCE}" \
         "docker://${LOCAL_REGISTRY}/${DEST}"; then
         echo "✓ Successfully synced: $SOURCE"
-        ((SUCCESS++))
+        SUCCESS=$((SUCCESS + 1))
       else
         echo "✗ Failed to sync: $SOURCE"
-        ((FAILED++))
+        FAILED=$((FAILED + 1))
       fi
       echo "-----------------------------------"
     done < "$IMAGE_LIST"
