@@ -1,0 +1,70 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: image-sync-config
+  namespace: registry
+data:
+  # List of images to sync from public registries to your local registry
+  # Format: SOURCE_IMAGE=DESTINATION_IMAGE
+  # or just SOURCE_IMAGE (will use same path in local registry)
+  images.txt: |
+    pihole:latest
+    jellyfin:latest
+    automatic-ripping-machine:latest
+
+  
+  # The sync script that will be executed
+  sync-images.sh: |
+    #!/bin/bash
+    set -e
+    
+    # Configuration
+    LOCAL_REGISTRY="registry.registry.svc.cluster.local:5000"
+    IMAGE_LIST="/config/images.txt"
+    
+    echo "Starting image sync at $(date)"
+    echo "Local registry: ${LOCAL_REGISTRY}"
+    echo "-----------------------------------"
+    
+    # Counter for success/failures
+    SUCCESS=0
+    FAILED=0
+    
+    # Read each line from the image list
+    while IFS= read -r line || [ -n "$line" ]; do
+      # Skip empty lines and comments
+      [[ -z "$line" || "$line" =~ ^[[:space:]]*# ]] && continue
+      
+      # Parse source and destination
+      if [[ "$line" == *"="* ]]; then
+        SOURCE=$(echo "$line" | cut -d'=' -f1)
+        DEST=$(echo "$line" | cut -d'=' -f2)
+      else
+        SOURCE="$line"
+        DEST="$line"
+      fi
+      
+      echo "Syncing: $SOURCE -> ${LOCAL_REGISTRY}/${DEST}"
+      
+      # Copy the image using skopeo
+      if skopeo copy \
+        --insecure-policy \
+        --dest-tls-verify=false \
+        "docker://${SOURCE}" \
+        "docker://${LOCAL_REGISTRY}/${DEST}"; then
+        echo "✓ Successfully synced: $SOURCE"
+        ((SUCCESS++))
+      else
+        echo "✗ Failed to sync: $SOURCE"
+        ((FAILED++))
+      fi
+      echo "-----------------------------------"
+    done < "$IMAGE_LIST"
+    
+    echo "Sync completed at $(date)"
+    echo "Summary: ${SUCCESS} succeeded, ${FAILED} failed"
+    
+    # Exit with error if any failed
+    if [ $FAILED -gt 0 ]; then
+      exit 1
+    fi

@@ -1,0 +1,50 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: image-sync
+  namespace: registry
+spec:
+  # Run every day at 3 AM
+  schedule: "0 3 * * *"
+  
+  # Keep last 3 successful and 1 failed job for debugging
+  successfulJobsHistoryLimit: 3
+  failedJobsHistoryLimit: 1
+  
+  jobTemplate:
+    spec:
+      template:
+        metadata:
+          labels:
+            app: image-sync
+        spec:
+          restartPolicy: OnFailure
+          
+          containers:
+          - name: skopeo
+            # Official skopeo image from Red Hat's Quay registry
+            image: quay.io/skopeo/stable:latest
+            
+            command:
+            - /bin/bash
+            - /config/sync-images.sh
+            
+            volumeMounts:
+            - name: config
+              mountPath: /config
+              readOnly: true
+            
+            # Resource limits to prevent hogging cluster resources
+            resources:
+              requests:
+                memory: "128Mi"
+                cpu: "100m"
+              limits:
+                memory: "512Mi"
+                cpu: "500m"
+          
+          volumes:
+          - name: config
+            configMap:
+              name: image-sync-config
+              defaultMode: 0755  # Make scripts executable
