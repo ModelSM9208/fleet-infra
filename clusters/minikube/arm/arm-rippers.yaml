@@ -29,7 +29,7 @@ spec:
               mountPath: /etc/arm/config
       containers:
         - name: arm-rippers
-          image: registry.local/automaticrippingmachine/automatic-ripping-machine:latest
+          image: registry.local/automaticrippingmachine/automatic-ripping-machine:vce
           resources:
             limits:
               amd.com/gpu: 1
