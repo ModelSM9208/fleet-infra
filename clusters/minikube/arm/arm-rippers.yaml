@@ -45,6 +45,9 @@ spec:
           volumeMounts:
             - name: dri
               mountPath: /dev/dri
+            - name: arm-yaml
+              mountPath: /etc/arm/config/arm.yaml
+              subPath: arm.yaml
             - name: home-arm
               mountPath: /home/arm
             - name: music
@@ -60,6 +63,9 @@ spec:
           hostPath:
             path: /dev/dri
             type: Directory
+        - name: arm-yaml
+          configMap:
+            name: arm-yaml-config
         - name: home-arm
           persistentVolumeClaim:
             claimName: arm-home

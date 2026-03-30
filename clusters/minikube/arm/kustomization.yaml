@@ -6,3 +6,4 @@ resources:
 - namespace.yaml
 - services.yaml
 - storage.yaml
+- arm-config.yaml

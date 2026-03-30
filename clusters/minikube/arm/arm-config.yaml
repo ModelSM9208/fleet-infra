@@ -1,0 +1,180 @@
+apiVersion: v1
+kind: ConfigMap
+metadata:
+  name: arm-yaml-config
+  namespace: utilities
+data:
+  arm.yaml: |
+    # ARM (Automatic Ripping Machine) config file
+
+    #################
+    ## ARM Options ##
+    #################
+
+    ARM_NAME: "A.R.M"
+    ARM_CHILDREN: ""
+
+    PREVENT_99: true
+    ARM_CHECK_UDF: true
+    UMASK: "0o002"
+
+    GET_VIDEO_TITLE: true
+    ARM_API_KEY: ""
+
+    DISABLE_LOGIN: false
+
+    SKIP_TRANSCODE: false
+
+    VIDEOTYPE: "auto"
+
+    MINLENGTH: "600"
+    MAXLENGTH: "99999"
+
+    MANUAL_WAIT: true
+    MANUAL_WAIT_TIME: 60
+
+    DATE_FORMAT: "%m-%d-%Y %H:%M:%S"
+
+    ALLOW_DUPLICATES: false
+
+    MAX_CONCURRENT_TRANSCODES: 0
+
+    DATA_RIP_PARAMETERS: ""
+
+    METADATA_PROVIDER: "omdb"
+
+    GET_AUDIO_TITLE: "musicbrainz"
+
+    # Requires FFmpeg — safe to enable since we are using FFmpeg
+    RIP_POSTER: true
+
+    UNIDENTIFIED_EJECT: true
+
+    ABCDE_CONFIG_FILE: "/etc/arm/config/abcde.conf"
+
+    #####################
+    ## Directory setup ##
+    #####################
+
+    RAW_PATH: "/home/arm/media/raw/"
+    TRANSCODE_PATH: "/home/arm/media/transcode/"
+    COMPLETED_PATH: "/home/arm/media/completed/"
+
+    EXTRAS_SUB: "extras"
+
+    INSTALLPATH: "/opt/arm/"
+
+    LOGPATH: "/home/arm/logs/"
+    LOGLEVEL: "INFO"
+    LOGLIFE: 1
+
+    DBFILE: "/home/arm/db/arm.db"
+
+    ##################
+    ##  Web Server  ##
+    ##################
+
+    WEBSERVER_IP: x.x.x.x
+    WEBSERVER_PORT: 8080
+    UI_BASE_URL: ""
+
+    ########################
+    ##  File Permissions  ##
+    ########################
+
+    SET_MEDIA_PERMISSIONS: false
+    CHMOD_VALUE: 777
+
+    SET_MEDIA_OWNER: false
+    CHOWN_USER: "None"
+    CHOWN_GROUP: "None"
+
+    MAKEMKV_PERMA_KEY: ""
+
+    ########################
+    ## MakeMKV Parameters ##
+    ########################
+
+    RIPMETHOD: "mkv"
+    RIPMETHOD_DVD: "PLACEHOLDER"
+    RIPMETHOD_BR: "PLACEHOLDER"
+
+    MKV_ARGS: ""
+    DELRAWFILES: false
+
+    ##########################
+    ## HandBrake Parameters ##
+    ##########################
+    # HandBrake is not used when USE_FFMPEG is true, but these are retained
+    # as fallback values in case FFmpeg is ever disabled.
+
+    HB_PRESET_DVD: "HQ 720p30 Surround"
+    HB_PRESET_BD: "HQ 1080p30 Surround"
+
+    DEST_EXT: "mkv"
+
+    HANDBRAKE_CLI: "HandBrakeCLI"
+    HANDBRAKE_LOCAL: "HandBrakeCLI"
+
+    MAINFEATURE: false
+
+    HB_ARGS_DVD: "--subtitle scan -F"
+    HB_ARGS_BD: "--subtitle scan -F --subtitle-burned --audio-lang-list eng --all-audio"
+
+    ##########################
+    ## FFmpeg Parameters    ##
+    ##########################
+
+    USE_FFMPEG: true
+
+    FFMPEG_CLI: ffmpeg
+    FFMPEG_LOCAL: ffmpeg
+
+    # VA-API hardware decode using AMD GPU via /dev/dri/renderD128
+    # These args are injected BEFORE -i <input_file>
+    FFMPEG_PRE_FILE_ARGS: "-hwaccel vaapi -hwaccel_device /dev/dri/renderD128 -hwaccel_output_format vaapi"
+
+    # Encode with h264_vaapi (AMD VA-API), copy all audio and subtitle tracks
+    # These args are injected AFTER -i <input_file> and before the output path
+    FFMPEG_POST_FILE_ARGS: "-c:v h264_vaapi -c:a copy -c:s copy -map 0"
+
+    #####################
+    ## Emby Parameters ##
+    #####################
+
+    EMBY_REFRESH: false
+    EMBY_SERVER: ""
+    EMBY_PORT: 8096
+    EMBY_CLIENT: "ARM"
+    EMBY_DEVICE: "ARM"
+    EMBY_DEVICEID: "ARM"
+    EMBY_USERNAME: ""
+    EMBY_USERID: ""
+    EMBY_PASSWORD: ""
+    EMBY_API_KEY: ""
+
+    #############################
+    ## Notification Parameters ##
+    #############################
+
+    NOTIFY_RIP: true
+    NOTIFY_TRANSCODE: true
+    NOTIFY_JOBID: false
+
+    PB_KEY: ""
+    IFTTT_KEY: ""
+    IFTTT_EVENT: "arm_event"
+    PO_USER_KEY: ""
+    PO_APP_KEY: ""
+
+    BASH_SCRIPT: ""
+
+    OMDB_API_KEY: ""
+    TMDB_API_KEY: ""
+    JSON_URL: ""
+
+    #################################################
+    ##            APPRISE NOTIFICATIONS            ##
+    #################################################
+
+    APPRISE: "/etc/arm/config/apprise.yaml"
