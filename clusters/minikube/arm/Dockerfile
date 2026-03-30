@@ -24,6 +24,7 @@ RUN apt-get update && apt-get install -y --no-install-recommends \
     libtheora-dev \
     libtool \
     libturbojpeg0-dev \
+    libva-dev \
     libvorbis-dev \
     libx264-dev \
     libxml2-dev \
@@ -53,6 +54,12 @@ RUN git clone --depth 1 --recurse-submodules https://github.com/HandBrake/HandBr
 
 # ── Stage 2: Final image ──────────────────────────────────────────────────────
 FROM automaticrippingmachine/automatic-ripping-machine:latest
+
+# VA-API runtime libraries for AMD open-source hardware encoding
+RUN apt-get update && apt-get install -y --no-install-recommends \
+    libva2 \
+    libva-drm2 \
+    && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
 
