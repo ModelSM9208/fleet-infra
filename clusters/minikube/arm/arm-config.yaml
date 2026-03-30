@@ -95,7 +95,7 @@ data:
     ## MakeMKV Parameters ##
     ########################
 
-    RIPMETHOD: "mkv"
+    RIPMETHOD: "backup"
     RIPMETHOD_DVD: "PLACEHOLDER"
     RIPMETHOD_BR: "PLACEHOLDER"
 
