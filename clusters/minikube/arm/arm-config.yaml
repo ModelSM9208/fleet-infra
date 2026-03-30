@@ -118,14 +118,14 @@ data:
 
     MAINFEATURE: false
 
-    HB_ARGS_DVD: "--subtitle scan -F"
-    HB_ARGS_BD: "--subtitle scan -F --subtitle-burned --audio-lang-list eng --all-audio"
+    HB_ARGS_DVD: "--subtitle 1,2,3,4,5 --subtitle-default 1"
+    HB_ARGS_BD: "--subtitle 1,2,3,4,5 --subtitle-default 1 --audio-lang-list eng --all-audio"
 
     ##########################
     ## FFmpeg Parameters    ##
     ##########################
 
-    USE_FFMPEG: true
+    USE_FFMPEG: false
 
     FFMPEG_CLI: ffmpeg
     FFMPEG_LOCAL: ffmpeg
