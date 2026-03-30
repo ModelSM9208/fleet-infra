@@ -59,6 +59,7 @@ FROM automaticrippingmachine/automatic-ripping-machine:latest
 RUN apt-get update && apt-get install -y --no-install-recommends \
     libva2 \
     libva-drm2 \
+    mesa-va-drivers \
     && rm -rf /var/lib/apt/lists/*
 
 COPY --from=builder /usr/local/bin/HandBrakeCLI /usr/local/bin/HandBrakeCLI
