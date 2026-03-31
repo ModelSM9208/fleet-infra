@@ -8,3 +8,6 @@ resources:
 - pihole
 - registry
 - vault
+- renovate
+- skopeo
+- awx
