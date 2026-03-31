@@ -2,7 +2,6 @@ apiVersion: batch/v1
 kind: CronJob
 metadata:
   name: image-sync
-  namespace: registry
 spec:
   # Run every day at 3 AM
   schedule: "0 3 * * *"
