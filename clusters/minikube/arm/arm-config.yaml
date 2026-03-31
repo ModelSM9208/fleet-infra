@@ -41,7 +41,7 @@ data:
 
     DATA_RIP_PARAMETERS: ""
 
-    METADATA_PROVIDER: "omdb"
+    METADATA_PROVIDER: "tmdb"
 
     GET_AUDIO_TITLE: "musicbrainz"
 
