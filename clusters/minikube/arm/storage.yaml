@@ -15,8 +15,8 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    io.kompose.service: arm-music
-  name: arm-music
+    io.kompose.service: arm-logs
+  name: arm-logs
 spec:
   accessModes:
     - ReadWriteOnce
@@ -28,14 +28,31 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   labels:
-    io.kompose.service: arm-logs
-  name: arm-logs
+    io.kompose.service: arm-config
+  name: arm-config
 spec:
   accessModes:
     - ReadWriteOnce
   resources:
     requests:
       storage: 100Mi
+---
+apiVersion: v1
+kind: PersistentVolumeClaim
+metadata:
+  labels:
+    io.kompose.service: arm-music
+  name: arm-music
+spec:
+  storageClassName: nfs
+  accessModes:
+    - ReadWriteMany
+  resources:
+    requests:
+      storage: 50G
+  selector:
+    matchLabels:
+      app: arm
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
@@ -55,19 +72,6 @@ spec:
       app: arm
 ---
 apiVersion: v1
-kind: PersistentVolumeClaim
-metadata:
-  labels:
-    io.kompose.service: arm-config
-  name: arm-config
-spec:
-  accessModes:
-    - ReadWriteOnce
-  resources:
-    requests:
-      storage: 100Mi
----
-apiVersion: v1
 kind: PersistentVolume
 metadata:
   name: movies-arm
@@ -84,3 +88,21 @@ spec:
   nfs:
     server: 192.168.49.1
     path: /var/mnt/movies
+---
+apiVersion: v1
+kind: PersistentVolume
+metadata:
+  name: music-arm
+  labels:
+    type: nfs
+    app: arm
+spec:
+  capacity:
+    storage: 50G
+  accessModes:
+    - ReadWriteMany
+  persistentVolumeReclaimPolicy: Retain
+  storageClassName: nfs
+  nfs:
+    server: 192.168.49.1
+    path: /var/mnt/music
