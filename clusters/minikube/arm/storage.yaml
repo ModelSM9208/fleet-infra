@@ -41,7 +41,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: arm-music
-  namespace: utilities
   labels:
     app: arm
 spec:
@@ -60,7 +59,6 @@ apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: arm-media
-  namespace: utilities
   labels:
     app: arm
 spec:
