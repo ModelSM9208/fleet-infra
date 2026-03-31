@@ -7,3 +7,5 @@ resources:
 - services.yaml
 - storage.yaml
 - arm-config.yaml
+patches:
+  - path: resources-patch.yaml

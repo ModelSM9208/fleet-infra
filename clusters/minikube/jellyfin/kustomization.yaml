@@ -5,3 +5,5 @@ resources:
 - storage.yaml
 - namespace.yaml
 - services.yaml
+patches:
+  - path: resources-patch.yaml

@@ -4,3 +4,5 @@ namespace: registry
 resources:
 - image-sync-configmap.yaml
 - image-sync-cronjob.yaml
+patches:
+  - path: resources-patch.yaml
