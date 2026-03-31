@@ -40,9 +40,10 @@ spec:
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
-  labels:
-    io.kompose.service: arm-music
   name: arm-music
+  namespace: utilities
+  labels:
+    app: arm
 spec:
   storageClassName: nfs
   accessModes:
@@ -53,11 +54,13 @@ spec:
   selector:
     matchLabels:
       app: arm
+      volume: arm-music
 ---
 apiVersion: v1
 kind: PersistentVolumeClaim
 metadata:
   name: arm-media
+  namespace: utilities
   labels:
     app: arm
 spec:
@@ -70,6 +73,7 @@ spec:
   selector:
     matchLabels:
       app: arm
+      volume: arm-media
 ---
 apiVersion: v1
 kind: PersistentVolume
@@ -78,6 +82,7 @@ metadata:
   labels:
     type: nfs
     app: arm
+    volume: arm-media
 spec:
   capacity:
     storage: 1Ti
@@ -96,6 +101,7 @@ metadata:
   labels:
     type: nfs
     app: arm
+    volume: arm-music
 spec:
   capacity:
     storage: 50G
