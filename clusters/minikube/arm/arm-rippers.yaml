@@ -20,7 +20,7 @@ spec:
             - name: home-arm
               mountPath: /home/arm
             - name: music
-              mountPath: /home/arm/Music
+              mountPath: /home/arm/music
             - name: logs
               mountPath: /home/arm/logs
             - name: media
@@ -51,7 +51,7 @@ spec:
             - name: home-arm
               mountPath: /home/arm
             - name: music
-              mountPath: /home/arm/Music
+              mountPath: /home/arm/music
             - name: logs
               mountPath: /home/arm/logs
             - name: media
