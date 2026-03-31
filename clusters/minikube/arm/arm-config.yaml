@@ -19,7 +19,7 @@ data:
     UMASK: "0o002"
 
     GET_VIDEO_TITLE: true
-    ARM_API_KEY: ""
+    ARM_API_KEY: "${ARM_API_KEY:=}"
 
     DISABLE_LOGIN: false
 
@@ -89,7 +89,7 @@ data:
     CHOWN_USER: "None"
     CHOWN_GROUP: "None"
 
-    MAKEMKV_PERMA_KEY: ""
+    MAKEMKV_PERMA_KEY: "${MAKEMKV_PERMA_KEY:=}"
 
     ########################
     ## MakeMKV Parameters ##
@@ -143,15 +143,15 @@ data:
     #####################
 
     EMBY_REFRESH: false
-    EMBY_SERVER: ""
+    EMBY_SERVER: "${EMBY_SERVER:=}"
     EMBY_PORT: 8096
     EMBY_CLIENT: "ARM"
     EMBY_DEVICE: "ARM"
     EMBY_DEVICEID: "ARM"
-    EMBY_USERNAME: ""
-    EMBY_USERID: ""
-    EMBY_PASSWORD: ""
-    EMBY_API_KEY: ""
+    EMBY_USERNAME: "${EMBY_USERNAME:=}"
+    EMBY_USERID: "${EMBY_USERID:=}"
+    EMBY_PASSWORD: "${EMBY_PASSWORD:=}"
+    EMBY_API_KEY: "${EMBY_API_KEY:=}"
 
     #############################
     ## Notification Parameters ##
@@ -161,16 +161,16 @@ data:
     NOTIFY_TRANSCODE: true
     NOTIFY_JOBID: false
 
-    PB_KEY: ""
-    IFTTT_KEY: ""
+    PB_KEY: "${PB_KEY:=}"
+    IFTTT_KEY: "${IFTTT_KEY:=}"
     IFTTT_EVENT: "arm_event"
-    PO_USER_KEY: ""
-    PO_APP_KEY: ""
+    PO_USER_KEY: "${PO_USER_KEY:=}"
+    PO_APP_KEY: "${PO_APP_KEY:=}"
 
     BASH_SCRIPT: ""
 
-    OMDB_API_KEY: ""
-    TMDB_API_KEY: ""
+    OMDB_API_KEY: "${OMDB_API_KEY:=}"
+    TMDB_API_KEY: "${TMDB_API_KEY}"
     JSON_URL: ""
 
     #################################################
