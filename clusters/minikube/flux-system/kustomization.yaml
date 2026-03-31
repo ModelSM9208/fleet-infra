@@ -4,3 +4,5 @@ resources:
 - gotk-components.yaml
 - gotk-sync.yaml
 - arm-kustomization.yaml
+patches:
+  - path: resources-patch.yaml

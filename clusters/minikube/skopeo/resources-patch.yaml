@@ -1,0 +1,18 @@
+apiVersion: batch/v1
+kind: CronJob
+metadata:
+  name: image-sync
+spec:
+  jobTemplate:
+    spec:
+      template:
+        spec:
+          containers:
+            - name: skopeo
+              resources:
+                requests:
+                  cpu: 100m
+                  memory: 128Mi
+                limits:
+                  cpu: "1"
+                  memory: 1Gi

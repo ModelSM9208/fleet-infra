@@ -4,3 +4,5 @@ namespace: registry
 resources:
 - registry.yaml
 - namespace.yaml
+patches:
+  - path: resources-patch.yaml
