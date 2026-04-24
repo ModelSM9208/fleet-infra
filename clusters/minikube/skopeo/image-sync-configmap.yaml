@@ -9,9 +9,8 @@ data:
   images.txt: |
     pihole/pihole:latest
     jellyfin/jellyfin:latest
-    automaticrippingmachine/automatic-ripping-machine:latest replaced by custom image
-
-  
+    automaticrippingmachine/automatic-ripping-machine:latest
+    
   # The sync script that will be executed
   sync-images.sh: |
     #!/bin/bash
