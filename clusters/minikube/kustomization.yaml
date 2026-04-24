@@ -11,3 +11,4 @@ resources:
 - renovate
 - skopeo
 - awx
+- arm
