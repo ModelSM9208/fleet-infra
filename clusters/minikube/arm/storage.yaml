@@ -89,7 +89,7 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs
   nfs:
-    server: 192.168.49.1
+    server: 192.168.2.188
     path: /var/mnt/movies
 ---
 apiVersion: v1
@@ -108,5 +108,5 @@ spec:
   persistentVolumeReclaimPolicy: Retain
   storageClassName: nfs
   nfs:
-    server: 192.168.49.1
+    server: 192.168.2.188
     path: /var/mnt/music
