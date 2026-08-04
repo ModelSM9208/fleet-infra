@@ -6,9 +6,9 @@ resources:
 #- demo
 - jellyfin
 - pihole
-#- registry
+- registry
 #- vault
 #- renovate
-#- skopeo
+- skopeo
 #- awx
 #- arm
