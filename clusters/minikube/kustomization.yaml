@@ -3,12 +3,12 @@ kind: Kustomization
 resources:
 - flux-system
 - dashboard
-- demo
+#- demo
 - jellyfin
 - pihole
 - registry
-- vault
-- renovate
+#- vault
+#- renovate
 - skopeo
-- awx
-- arm
+#- awx
+#- arm
