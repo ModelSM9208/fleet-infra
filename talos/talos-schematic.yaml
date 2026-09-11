@@ -1,0 +1,7 @@
+customization:
+  secureboot:
+    includeWellKnownCertificates: false
+  systemExtensions:
+    officialExtensions:
+      - siderolabs/i915
+      - siderolabs/intel-ucode
