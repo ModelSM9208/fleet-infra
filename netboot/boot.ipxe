@@ -1,0 +1,2 @@
+#!ipxe
+chain http://192.168.2.188:8080/metal-amd64-secureboot-uki.efi
