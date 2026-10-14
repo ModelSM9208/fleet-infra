@@ -1,3 +1,4 @@
+apiVersion: storage.k8s.io/v1
 kind: StorageClass
 metadata:
   name: nfs-csi
@@ -10,6 +11,6 @@ parameters:
   onDelete: archive
 reclaimPolicy: Delete
 volumeBindingMode: Immediate
-moutOptions:
+mountOptions:
   - nfsvers=4.2
   - hard
