@@ -1,0 +1,15 @@
+kind: StorageClass
+metadata:
+  name: nfs-csi
+  annotations:
+    storageclass.kubernetes.io/is-default-class: "true"
+provisioner: nfs.csi.k8s.io
+parameters:
+  server: 192.168.2.188
+  share: /mnt/array/nfs/k8s
+  onDelete: archive
+reclaimPolicy: Delete
+volumeBindingMode: Immediate
+moutOptions:
+  - nfsvers=4.2
+  - hard

@@ -1,0 +1,4 @@
+kind: HelmRepository
+spec:
+  interval: 12h
+  url: https://raw.githubusercontent.com/kubernetes-csi/csi-driver-nfs/master/charts
