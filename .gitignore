@@ -48,3 +48,11 @@ terraform.rc
 *.key
 *.crt
 
+# Talos / cluster credentials: generated locally, never committed
+secrets.yaml
+_out/
+talosconfig
+kubeconfig
+controlplane.yaml
+worker.yaml
+*.agekey
