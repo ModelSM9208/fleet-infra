@@ -1,0 +1,13 @@
+apiVersion: v1alpha1
+kind: NetworkDefaultActionConfig
+ingress: block
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: apid
+portSelector:
+  ports: [50000]
+  protocol: tcp
+ingress:
+  - subnet: 192.168.2.120/30
+  - subnet: 192.168.2.124/31

@@ -1,0 +1,49 @@
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: kubelet
+portSelector:
+  ports: [10250]
+  protocol: tcp
+ingress:
+  - subnet: 192.168.2.120/30        # node block .120-.123
+  - subnet: 192.168.2.124/31        # node block .124-.125
+  - subnet: 10.244.0.0/16           # metrics and logs requests from pods
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: cilium-health-hubble
+portSelector:
+  ports: [4240, 4244]               # cilium-health probes, Hubble server
+  protocol: tcp
+ingress:
+  - subnet: 192.168.2.120/30
+  - subnet: 192.168.2.124/31
+  - subnet: 10.244.0.0/16           # Hubble Relay runs as a pod
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: cilium-wireguard
+portSelector:
+  ports: [51871]                    # without this, cross-node pod traffic silently dies
+  protocol: udp
+ingress:
+  - subnet: 192.168.2.120/30
+  - subnet: 192.168.2.124/31
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: host-dns-udp
+portSelector:
+  ports: [53]                       # CoreDNS forwards to Talos's host DNS proxy
+  protocol: udp
+ingress:
+  - subnet: 10.244.0.0/16
+---
+apiVersion: v1alpha1
+kind: NetworkRuleConfig
+name: host-dns-tcp
+portSelector:
+  ports: [53]
+  protocol: tcp
+ingress:
+  - subnet: 10.244.0.0/16
