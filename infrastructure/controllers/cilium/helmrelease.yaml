@@ -1,0 +1,17 @@
+apiVersion: helm.toolkit.fluxcd.io/v2
+kind: HelmRelease
+metadata:
+  name: cilium
+  namespace: kube-system
+spec:
+  interval: 30m
+  releaseName: cilium             # same name step 6 installs, so Flux adopts that release
+  chartRef:
+    kind: OCIRepository
+    name: cilium
+  valuesFrom:
+    - kind: ConfigMap
+      name: cilium-values         # generated from values.yaml by the kustomization below
+  upgrade:
+    remediation:
+      retries: 3                  # a failed upgrade rolls back instead of leaving a half-applied CNI

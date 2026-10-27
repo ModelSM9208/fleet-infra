@@ -1,0 +1,35 @@
+ipam:
+  mode: kubernetes                     # use the per-node pod CIDRs Kubernetes assigns
+kubeProxyReplacement: true             # eBPF serves Services; kube-proxy is off in Talos
+k8sServiceHost: localhost              # KubePrism: Talos's local API proxy on every node...
+k8sServicePort: 7445                   # ...because the 'kubernetes' Service needs routing that doesn't exist yet
+securityContext:
+  capabilities:                        # Talos-required set; no SYS_MODULE (Talos forbids module loads from pods)
+    ciliumAgent: [CHOWN, KILL, NET_ADMIN, NET_RAW, IPC_LOCK, SYS_ADMIN, SYS_RESOURCE, DAC_OVERRIDE, FOWNER, SETGID, SETUID]
+    cleanCiliumState: [NET_ADMIN, SYS_ADMIN, SYS_RESOURCE]
+cgroup:
+  autoMount:
+    enabled: false                     # Talos already mounts cgroup2
+  hostRoot: /sys/fs/cgroup
+routingMode: native                    # nodes share one L2 segment: route pod CIDRs directly, no VXLAN
+autoDirectNodeRoutes: true             # each node installs routes to the others' pod CIDRs
+ipv4NativeRoutingCIDR: 10.244.0.0/16   # Talos default pod subnet
+encryption:
+  enabled: true                        # WireGuard between nodes; agents make their own keys, nothing goes in Git
+  type: wireguard
+gatewayAPI:
+  enabled: true                        # inert until phase 2 defines a class
+  enableAlpn: true
+  enableAppProtocol: true
+  gatewayClass:
+    create: false                      # no default class; phase 2 creates only nomad-edge
+hubble:
+  relay:
+    enabled: true
+  ui:
+    enabled: true                      # ClusterIP only; you reach it with `cilium hubble ui`
+rollOutCiliumPods: true                # a values change restarts pods so it actually takes effect
+operator:
+  rollOutPods: true
+envoy:
+  rollOutPods: true
