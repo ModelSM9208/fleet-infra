@@ -3,3 +3,9 @@ kind: HostnameConfig
 auto:
   $patch: delete
 hostname: wk02
+---
+apiVersion: v1alpha1
+kind: LinkAliasConfig
+name: lan0
+selector:
+  match: mac(link.permanent_addr) == "e4:54:e8:76:0a:60"
